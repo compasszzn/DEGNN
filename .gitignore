@@ -1,0 +1,8 @@
+.DS_Store
+__pycache__/
+/datasets/
+/wandb/
+/saved models/
+*.pyc
+*.npy
+*.log

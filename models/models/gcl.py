@@ -209,8 +209,6 @@ class E_GCL_vel(E_GCL):
 
         if self.pool_method == 'self_attn':
             self.attn=nn.MultiheadAttention(hidden_nf,1)
-        elif self.pool_method == 'rank':
-            self.attn=nn.Linear(len(self.group)*(3*4+1),3*4+1)
 
 
             
@@ -228,57 +226,7 @@ class E_GCL_vel(E_GCL):
 
         _, coord_diff = self.coord2radial(edge_index, coord)
 
-        if self.pool_method=='mean':
-            edge_feat = 0
-            for e in self.group:
-                radial, _ = self.coord2radial(edge_index, torch.matmul(coord, e.to(h.device)))
-                vel_rot=torch.cat([torch.matmul(vel,e.to(h.device))[row], torch.matmul(vel,e.to(h.device))[col]], dim=1)
-                edge_feat += self.edge_model(h[row], h[col], radial,vel_rot, edge_attr)
-            edge_feat /= len(self.group)
-
-        elif self.pool_method=='rank':
-
-            cat_edge_features = []
-            for e in self.group:
-                radial, _ = self.coord2radial(edge_index, torch.matmul(coord, e.to(h.device)))
-                vel_rot=torch.cat([torch.matmul(vel,e.to(h.device))[row], torch.matmul(vel,e.to(h.device))[col]], dim=1)
-                cat_edge_features.append(torch.cat([radial,vel_rot], dim=1))
-
-            catedge = torch.stack(cat_edge_features).permute(1,0,2)
-            sum_catedge = torch.sum(catedge, dim=2)
-            sorted_indices = torch.argsort(sum_catedge)
-            # sorted_indices = torch.argsort(catedge[:, :, 0], dim=1)
-            catedge = torch.gather(catedge, 1, sorted_indices.unsqueeze(-1).expand(-1, -1, catedge.size(-1)))
-            num_slices = len(self.group)
-            catedge = torch.cat([catedge[:, i, :] for i in range(num_slices)], dim=1)
-            catedge=self.attn(catedge)
-            edge_feat=self.edge_model(h[row], h[col], catedge,vel_rot=None,edge_attr= edge_attr)
-
-        elif self.pool_method=='rank':
-            rank =1
-            cat_edge_features = []
-            for e in self.group:
-                radial, _ = self.coord2radial(edge_index, torch.matmul(coord, e.to(h.device)))
-                vel_rot=torch.cat([torch.matmul(vel,e.to(h.device))[row], torch.matmul(vel,e.to(h.device))[col]], dim=1)
-                cat_edge_features.append(torch.cat([radial,vel_rot], dim=1))
-            #rank
-
-            catedge = torch.stack(cat_edge_features).permute(1,0,2)
-            sorted_indices = torch.argsort(catedge[:, :, 0], dim=1)
-            sorted_data = torch.gather(catedge, 1, sorted_indices.unsqueeze(-1).expand(-1, -1, catedge.size(-1)))
-            sorted_cat_edge_features=sorted_data[:,rank,:]
-            edge_feat=self.edge_model(h[row], h[col], sorted_cat_edge_features,vel_rot=None,edge_attr= edge_attr)
-
-
-        elif self.pool_method=='sum':
-            edge_feat = 0
-            for e in self.group:
-                radial, _ = self.coord2radial(edge_index, torch.matmul(coord, e.to(h.device)))
-                vel_rot=torch.cat([torch.matmul(vel,e.to(h.device))[row], torch.matmul(vel,e.to(h.device))[col]], dim=1)
-                edge_feat += self.edge_model(h[row], h[col], radial,vel_rot, edge_attr)
-
-
-        elif self.pool_method=='self_attn':
+        if self.pool_method=='self_attn':
             list_edge_features = []
             for e in self.group:
                 radial, _ = self.coord2radial(edge_index, torch.matmul(coord, e.to(h.device)))

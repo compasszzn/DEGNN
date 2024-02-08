@@ -47,7 +47,7 @@ if __name__ == "__main__":
     parser.add_argument('--gpus_num', type=str, default="0",
                         help='Model name')
     parser.add_argument('--pool_method', type=str, default="self_attn",
-                        help='Model name [self_attn,rank,mean,sum]')
+                        help='pool_method')
 
  
     

@@ -17,7 +17,7 @@ def train(args):
     if args.gpus:
         device = torch.device('cuda:' + str(args.gpus_num))
     else:
-        device = 'cpu'
+        device = torch.device('cpu')
 
     model = DEGNN_vel(in_node_nf=1, in_edge_nf=8, hidden_nf=64,model_type=args.dataset,pool_method=args.pool_method,device=device, n_layers=args.layers,
                         recurrent=True, norm_diff=False, tanh=False,embed_vel=True)

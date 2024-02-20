@@ -67,7 +67,6 @@ if __name__ == "__main__":
         seed = random.randint(0,1000)
     else:
         seed = args.seed
-    seed = random.randint(0,1000)
     torch.manual_seed(seed)
 
 

@@ -1,8 +1,12 @@
 # DEGNN
 
-## **Installation**
+This is the official implementation for the following paper:
 
-Clone this repository and install the required packages:
+Relaxing Continuous Constraints of Equivariant Graph Neural Networks for Physical Dynamics Learning
+
+Zinan Zheng^, Yang liu^, Jia Li*, Jianhua Yao, Yu Rong* 
+
+KDD 2024
 
 ```bash
 cd DEGNN
@@ -10,16 +14,19 @@ pip install -r requirements.txt
 ```
 
 ## **Quick Start**
-We provide molecular datasets.
+Run the crowd datasets.
 ```bash
-python main.py --dataset "nbody_charged_5_4_3"
-python main.py --dataset "nbody_charged_5_5_5"
-python main.py --dataset "nbody_charged_5_4_4"
-python main.py --dataset "nbody_charged_4_4_4"
+python main.py --dataset "indi_low" --lr "5e-4"
+python main.py --dataset "indi_high" --lr "5e-4"
+python main.py --dataset "group_low" --lr "5e-4"
+python main.py --dataset "group_high" --lr "5e-4"
 ```
+Run the vehicle datasets
 ```bash
-python main.py --dataset "nbody_gravity_5_4_3"
-python main.py --dataset "nbody_gravity_5_5_5"
-python main.py --dataset "nbody_gravity_5_4_4"
-python main.py --dataset "nbody_gravity_4_4_4"
+python main.py --dataset "0_vehicle" --lr "5e-4"
+python main.py --dataset "1_vehicle" --lr "5e-4"
+python main.py --dataset "2_vehicle" --lr "5e-4"
+python main.py --dataset "3_vehicle" --lr "5e-4"
+python main.py --dataset "4_vehicle" --lr "5e-4"
+python main.py --dataset "5_vehicle" --lr "5e-4"
 ```

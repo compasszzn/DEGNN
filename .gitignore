@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*$py.class
+nohup.out
+
+dataset/molecular_dataset/
+dataset/nbodydata/
+dataset/vehical_dataset/raw_data/

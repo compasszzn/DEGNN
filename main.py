@@ -28,11 +28,11 @@ if __name__ == "__main__":
                         help='Batch size. Does not scale with number of gpus.')
     parser.add_argument('--lr', type=float, default=5e-4,
                         help='learning rate')
-    parser.add_argument('--dataset', type=str, default="0_vehicle",
+    parser.add_argument('--dataset', type=str, default="nbody_charged_4_4_4",
                         help='Data set')
     parser.add_argument('--dataset_size', type=int, default=6000,
                         help='Data set')
-    parser.add_argument('--dataset_segment', type=str, default='1,1,1',
+    parser.add_argument('--dataset_segment', type=str, default='1,10,10',
                         help='Data set')
     parser.add_argument('--gpus_num', type=str, default="3",
                         help='Model name')

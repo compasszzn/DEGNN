@@ -2,7 +2,7 @@
 
 This is the official implementation for the following paper:
 
-Relaxing Continuous Constraints of Equivariant Graph Neural Networks for Physical Dynamics Learning
+Relaxing Continuous Constraints of Equivariant Graph Neural Networks for Broad Physical Dynamics Learning
 
 Zinan Zheng^, Yang liu^, Jia Li*, Jianhua Yao, Yu Rong* 
 

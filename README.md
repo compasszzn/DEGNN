@@ -11,7 +11,11 @@ KDD 2024
 ```bash
 cd DEGNN
 conda create -n degnn python=3.10
-pip install -r requirements.txt
+conda activate degnn
+pip install torch==2.0.1 --index-url https://download.pytorch.org/whl/cu118
+pip install torch_geometric
+pip install torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.0.1+cu118.html
+pip install numpy==1.26.0
 ```
 
 The nbody and molecular dataset is hosted on Hugging Face and can be accessed [here](https://huggingface.co/datasets/compasszzn/Molecular/tree/main). 

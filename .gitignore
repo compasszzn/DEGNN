@@ -5,4 +5,5 @@ nohup.out
 
 dataset/molecular_dataset/
 dataset/nbodydata/
-dataset/vehical_dataset/raw_data/
+dataset/vehical_dataset/
+dataset/crowd_dataset/

@@ -10,6 +10,7 @@ KDD 2024
 
 ```bash
 cd DEGNN
+conda create -n degnn python=3.10
 pip install -r requirements.txt
 ```
 

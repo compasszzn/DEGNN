@@ -9,7 +9,7 @@ from dataset.dataset_nbody import NBodyDataset, GravityNBodyDataset
 time_exp_dic = {'time': 0, 'counter': 0}
 
 
-def train(args):
+def train(args): 
 
     if args.gpus:
         device = torch.device('cuda:' + str(args.gpus_num))
